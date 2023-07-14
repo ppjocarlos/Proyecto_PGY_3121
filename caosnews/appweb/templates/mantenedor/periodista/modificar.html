@@ -1,0 +1,26 @@
+{%  extends 'base_admin.html' %}
+{% load static %}
+
+{% block contenido2 %}
+
+{% load crispy_forms_tags %}
+
+<div class="container m-5">
+    <div class="text -center">
+        <h2>Modificar Periodista</h2>
+    </div>
+
+    <form id="formAddProf" action="" method="post">
+
+        {% csrf_token %}
+
+        {{form | crispy}}
+
+        <button type="submit" class="btn btn-success"> Modificar </button>
+        <a href="{% url 'listar_periodista' %}" class="btn btn-danger">Cancelar</a>
+
+    </form>
+    {{mensaje}}
+</div>
+
+{% endblock %}

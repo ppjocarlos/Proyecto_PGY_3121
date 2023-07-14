@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERIODISTA</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+    integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: #184e68;
+      background: linear-gradient(to right, #184e68, #57ca85);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+{% load static %}
+<body>
+
+    <div class="container-fluid mt-3 ">
+        <div class="row">
+            <div class="col-4 rounded-end">
+                
+                  <button class="btn btn-dark bg-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                 
+                    <img class=" float-start pt-1 pe-3 img-fluid mx-auto d-block d-none d-lg-block" src="{% static './Imagenes/logo1.png' %}" alt="" width="80px">
+                    <div class="float-end">                                                          
+                        <h3 class="text-black fw-bold">{{user.username}}</h3>
+                        <h6 class="fw-bold text-warning">PERIODISTA</h6>
+                    </div>
+                    
+                  </button>
+                  
+                  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Periodista</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                  <div class="offcanvas-body">
+
+                      <a class="btn btn-secondary text-start d-grid mb-4" href="{% url 'agregar_noticia' %}" role="button"><i class="bi bi-file-earmark-plus"> Nueva Publicación </i></a>
+                      <a class="btn btn-secondary text-start d-grid" href="{% url 'estado_noticia' %}" role="button"><i class="bi bi-chat-left-text"> Notificaciones </i></a>                     
+                      <a class="btn btn-danger mt-5" href="{% url 'home' %}" role="button"><i class="bi bi-escape"></i> Salir</a>
+                  </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+ 
+  <main>
+    {% if messages %}
+      {% for m in messages %}
+        
+        <script>
+            Swal.fire({
+              "title": "{{m}}",
+              "icon": "success" 
+            })            
+        </script>
+
+      {% endfor %}
+    {% endif %}
+
+    <div id="contenido">
+    
+      {% block contenido3 %}
+    
+      {% endblock %}
+    
+    </div>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,51 @@
+{%  extends 'base_admin.html' %}
+{% block contenido2 %}
+{% load static %}
+
+<!-- Carrusel noticias-->
+
+
+<section class="container my-4">
+    <div class="row">
+      <div class="col">
+        <h1 class="mb-4  text fw-bold"> Postulante </h1>
+        <img width="270" height="350"
+                  
+                    src="{{curriculum.foto.url}}"
+                    class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">  
+      </div>
+    </div>
+  
+  </section>
+
+    <!-- INFORMACION -->
+
+  <section class="container my-4">
+    <div class="row">
+      <div class="col ">
+        <h1 class="text-danger fw-bold rounded mb-4">
+          {{curriculum.nombre}} {{curriculum.apellido}}
+        </h1>       
+        <h4 class="text-dark">Profesión:</h4><h4 class="text-light rounded">{{curriculum.profesion}}</h4>
+        
+        <h4 class="text-dark">Telefono:</h4><h4 class="text-light rounded"> {{curriculum.telefono}}</h4>
+        
+        <h4 class="text-dark">Correo:<h4 class="text-light mb-4">{{curriculum.correo}}</h4>
+        
+        <h4 class="text-dark">Ubicación:<h4 class="text-light rounded"> {{curriculum.ubicacion}}</h4>
+
+        <h4 class="text-dark">Educación:
+        <h4 class="text-light mb-4">                 
+            {{curriculum.educacion}}
+        </h4>
+        <h4 class="text-dark">Experiencia laboral:
+        <h4 class="text-light mb-4">                 
+          {{curriculum.experiencia}}
+        </h4>
+      </div>
+    </div>
+
+
+  </section>
+
+{% endblock %}

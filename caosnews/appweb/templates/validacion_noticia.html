@@ -1,0 +1,114 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block contenido2 %}
+
+<div class="container" id="OP2">
+  <div class="row">
+      <div class="col-12 text-center">
+          <h2>Noticias Pendientes de aprobación</h2>
+          <br><br>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-8">
+          <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                  <thead class="thead-light">
+                      <tr>
+                          <th scope="col">Id Noticia</th>
+                          <th scope="col">Periodista</th>
+                          <th scope="col">Tiulo de la Noticia</th>
+                          <th scope="col">Imagen</th>
+                          <th scope="col">Estado</th>
+                          <th scope="col">Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>  
+                      {% for n in noticia %}
+                      {% if n.estado == 0 %}
+                      
+                      <tr>
+                          <th scope="row">{{n.id}}</th>
+                          <td>{{n.periodista.nombre}}</td>
+                          <td>{{n.titulo}}</td>
+                          <td>
+                              <img src="{{ n.foto.url }}" alt="Imagen de la noticia" width="50"
+                                  class="enlarge-image">
+                          </td>
+                          <td>En espera</td>
+                          <td>
+                              <a href="#" class="btn btn-success btn-sm"
+                                  onclick="aprobacionNoticia('{{n.id}}')">Aprobar</a>
+                              <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal">Rechazar</a>
+                          </td>
+                      </tr>
+
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Rechazar noticia</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form class="row" id="rechazoForm" action="" method="POST">
+                                
+                                {% csrf_token %}
+                                
+                                    <label for="">Motivo</label>
+                                    <textarea name="motivo_rechazo" id="" cols="20" rows="5" class="form-control"></textarea>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-danger" onclick="rechazarNoticia('{{n.id}}')">Rechazar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <script>
+          function aprobacionNoticia(id) {
+              Swal.fire({
+                  title: "Advertencia",
+                  text: "¿Estás seguro que deseas aprobar la publicación?",
+                  icon: "question",
+                  showCancelButton: true,
+                  cancelButtonText: "No, cancelar",
+                  confirmButtonText: "Sí, aprobar"
+              }).then(function (result) {
+                  if (result.isConfirmed) {
+                      window.location.href = "/aprobacion_noticia/" + id + "/";
+                  }
+              });
+          }
+
+          function rechazarNoticia(id) {
+              Swal.fire({
+                  title: "Advertencia",
+                  text: "¿Estás seguro que deseas rechazar la publicación?",
+                  icon: "question",
+                  showCancelButton: true,
+                  cancelButtonText: "No, cancelar",
+                  confirmButtonText: "Sí, rechazar"
+              }).then(function (result) {
+                  if (result.isConfirmed) {
+                      document.getElementById('rechazoForm').action = "/rechazar_noticia/" + id + "/";
+                      document.getElementById('rechazoForm').submit();
+                  }
+              });
+          }
+      </script>
+</body>
+
+{% endblock %}

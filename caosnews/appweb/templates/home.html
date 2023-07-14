@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+ 
+
+<!-- Carrusel -->
+
+    <div class="container my-4">
+        <div class="row">
+
+            <!-- Inicio de carrusel -->
+            <div class="col-12 rounded">
+
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      {% for n in noticia %}
+                      {% if n.estado == 1 %}
+                      <!-- Primer panel o imagen -->
+                      <div class="carousel-item active">
+                        <a href="#"><img src="{{ n.foto.url }}" class="d-block w-100 rounded" alt="..."></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <p class="text-danger fw-bold">{{ n.seccion }}</p>
+                            <a class="link-light link-offset-2 link-offset-3-hover link-underline-light link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url 'noticia_detalle' n.id %}">
+                                <h3 class="text-bg-dark rounded">{{ n.titulo }}</h3>
+                            </a>
+                        </div> 
+                      </div>
+                      
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Termino de carrusel -->
+        </div>
+    </div>
+
+{% endblock %}

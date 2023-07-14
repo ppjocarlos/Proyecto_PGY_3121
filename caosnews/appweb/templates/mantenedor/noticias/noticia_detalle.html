@@ -1,0 +1,50 @@
+{%  extends 'base.html' %}
+{% block contenido %}
+{% load static %}
+
+<!-- Carrusel noticias-->
+
+
+<section class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <img src="{{ noticia.foto.url }}" class="d-block w-100 rounded" alt="...">  
+      </div>
+    </div>
+  
+  </section>
+
+  <!-- CATEGORIA -->
+
+  <section class="container">
+    <div class="row">
+
+      <div class="my-2">
+        <h3 class="text-warning fw-bold">
+          {{ noticia.seccion }}
+        </h3>
+      </div>
+
+    <!-- INFORMACION -->
+
+
+    <div class="row">
+      <div class="col">
+        <h1 class="text-danger text-bg-dark fw-bold rounded">
+            {{noticia.titulo}}
+        </h1>
+        <h4 class="text-light rounded"> {{noticia.periodista.nombre}} {{noticia.periodista.apellido}}</h4>
+        
+        <h5 class="text-light mb-4"><em>  {{noticia.ubicacion}}, {{noticia.fecha_noticia}}</em></h5>
+        <hr>
+        
+        <h6 class="text-light mt-4">                 
+            {{noticia.informacion}}
+          </h6>
+      </div>
+    </div>
+
+
+  </section>
+
+{% endblock %}

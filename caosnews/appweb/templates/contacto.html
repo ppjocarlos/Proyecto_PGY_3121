@@ -1,0 +1,18 @@
+{%  extends 'base.html' %}
+{% block contenido %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+  <div class="container my-5">
+    
+    <form id="formContacto" action="" method="post" >
+      <h1 class="mb-4 text-center text fw-bold"> Contactanos </h1>
+      {% csrf_token %}
+      {{form | crispy}}
+      
+      <button type="submit" class="btn btn-success" id="enviar"> Enviar</button>
+    </form>
+
+</div>
+
+{% endblock %}
